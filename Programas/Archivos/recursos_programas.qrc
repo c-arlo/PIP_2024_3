@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="Logos">
+    <file>mexico.png</file>
+  </qresource>
+  <qresource prefix="Ejercicios">
+    <file>trian.jpg</file>
+    <file>IMC.png</file>
+  </qresource>
+  <qresource prefix="Catos">
+    <file>duende.jpg</file>
+    <file>5_peso.jpg</file>
+  </qresource>
+  <qresource prefix="Frutas">
+    <file>banana.png</file>
+    <file>pina.png</file>
+  </qresource>
+</RCC>
