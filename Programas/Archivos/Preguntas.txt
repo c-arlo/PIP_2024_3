@@ -1,0 +1,5 @@
+Nombre de la materia:, PIP, PIP, SE, PA, DERV
+Dia en que se imparte la clase:, Viernes, Viernes, Lunes, Martes, Miercoles
+Dia de la independencia:, 16 de S., 16 de S., 20 de S., 12 de S., 15 de S.
+En que salon se da la clase de PIP:, 410, 410, 310, 210, 110
+Nombre del rector de la UAT:, Damaso, Damaso, Ricardo, Eduardo, Osvaldo
