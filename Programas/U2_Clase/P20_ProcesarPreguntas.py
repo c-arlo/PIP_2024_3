@@ -12,6 +12,7 @@ def procesar_preguntas():
     for pregunta in preguntas: #desordena las opciones
         rnd.shuffle(pregunta[2])
         #print(pregunta)
+    return preguntas
 
 if __name__ == '__main__':
     preguntas = procesar_preguntas()

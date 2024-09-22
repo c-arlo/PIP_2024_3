@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>331</height>
+    <width>488</width>
+    <height>301</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,24 +17,39 @@
    <widget class="QLineEdit" name="txt_pregunta">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>0</y>
+      <x>21</x>
+      <y>19</y>
       <width>421</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Gill Sans MT</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>PREGUNTA</string>
+     <string>Pregunta</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>60</y>
+      <x>21</x>
+      <y>69</y>
       <width>421</width>
       <height>121</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Gill Sans MT</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="title">
      <string>Opciones:</string>
@@ -50,6 +65,9 @@
      </property>
      <property name="text">
       <string>Opcion A</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="rb_opcionC">
@@ -95,14 +113,20 @@
    <widget class="QPushButton" name="btn_validar">
     <property name="geometry">
      <rect>
-      <x>319</x>
-      <y>191</y>
+      <x>320</x>
+      <y>200</y>
       <width>121</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Gill Sans MT</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>VALIDAR</string>
+     <string>Siguiente</string>
     </property>
    </widget>
   </widget>
@@ -111,7 +135,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>484</width>
+     <width>488</width>
      <height>21</height>
     </rect>
    </property>
