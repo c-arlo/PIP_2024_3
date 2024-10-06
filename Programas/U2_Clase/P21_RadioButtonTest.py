@@ -45,7 +45,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             pass
         self.index += 1
         if self.index >= len(self.preguntas):
-            m = "Obtuvo una calificacion de {0}/5".format(self.calif)
+            m = "Obtuvo una calificacion de {0}/10".format(self.calif)
             self.mensaje(m)
             sys.exit()
         else:

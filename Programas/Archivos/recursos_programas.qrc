@@ -2,7 +2,15 @@
   <qresource prefix="Logos">
     <file>mexico.png</file>
   </qresource>
+  <qresource prefix="IMC">
+    <file>IMCTabla.png</file>
+    <file>IMC_Bajo.png</file>
+    <file>IMC_Normal.png</file>
+    <file>IMC_Obesidad.png</file>
+    <file>IMC_Sobrepeso.png</file>
+  </qresource>
   <qresource prefix="Ejercicios">
+    <file>bulb.png</file>
     <file>trian.jpg</file>
     <file>IMC.png</file>
   </qresource>

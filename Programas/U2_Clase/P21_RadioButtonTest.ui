@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>488</width>
-    <height>301</height>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,22 +54,6 @@
     <property name="title">
      <string>Opciones:</string>
     </property>
-    <widget class="QRadioButton" name="rb_opcionA">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>99</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Opcion A</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QRadioButton" name="rb_opcionC">
      <property name="geometry">
       <rect>
@@ -107,6 +91,19 @@
      </property>
      <property name="text">
       <string>opcion D</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rb_opcionA">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>99</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Opcion A</string>
      </property>
     </widget>
    </widget>
