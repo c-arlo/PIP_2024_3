@@ -3,7 +3,7 @@ from PyQt5 import uic, QtWidgets
 qtCreatorFile = "P1_LoadImage.ui"  # Nombre del archivo aquí.
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
-"""pyrcc5 recursos_programas.qrc -o recursos_programas_rc.py"""
+#pyrcc5 recursos_programas.qrc -o recursos_programas_rc.py / Luego reemplaza el .py
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):

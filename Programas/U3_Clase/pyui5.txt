@@ -1,0 +1,10 @@
+pyuic5 [nombre del .ui] -o [nombre del .py] <- Volver a generar cada cambio en el QtDesigner :(
+
+import [nombre del .py] as interfaz
+
+class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow): <- Cambia interfaz.Ui_MainWindow
+
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        interfaz.Ui_MainWindow.__init__(self) <-- Cambia interfaz.Ui_MainWindow
+

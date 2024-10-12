@@ -16,4 +16,5 @@ def procesar_preguntas():
 
 if __name__ == '__main__':
     preguntas = procesar_preguntas()
-    print(preguntas)
+    for i in preguntas:
+        print(i)

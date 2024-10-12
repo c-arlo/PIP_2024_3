@@ -9,6 +9,13 @@
     <file>IMC_Obesidad.png</file>
     <file>IMC_Sobrepeso.png</file>
   </qresource>
+  <qresource prefix="Memorama">
+    <file>Memorama/coco.png</file>
+    <file>Memorama/fresa.png</file>
+    <file>Memorama/manzana.png</file>
+    <file>Memorama/pera.png</file>
+    <file>Memorama/Desc.png</file>
+  </qresource>
   <qresource prefix="Ejercicios">
     <file>bulb.png</file>
     <file>trian.jpg</file>
