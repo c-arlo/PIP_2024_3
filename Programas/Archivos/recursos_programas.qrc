@@ -2,6 +2,12 @@
   <qresource prefix="Logos">
     <file>mexico.png</file>
   </qresource>
+  <qresource prefix="PPT">
+    <file>default.jpg</file>
+    <file>piedra.jpg</file>
+    <file>papel.jpg</file>
+    <file>tijeras.jpg</file>
+  </qresource>
   <qresource prefix="IMC">
     <file>IMCTabla.png</file>
     <file>IMC_Bajo.png</file>
