@@ -149,6 +149,7 @@ class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow):
 
     def maxX(self):
         self.xMax = self.sbXmax.value()
+        self.sbXDiv.setMaximum(self.xMax)
         self.graficar()
 
     def divisionesX(self):
@@ -162,6 +163,7 @@ class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow):
 
     def maxY(self):
         self.yMax = self.sbYmax.value()
+        self.sbYDiv.setMaximum(self.yMax)
         self.graficar()
 
     def divisionesY(self):
@@ -266,7 +268,8 @@ class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow):
                      color=self.colorLinea,  # color de la linea
                      linewidth=self.anchoLinea,  # tamaño de la linea
                      dash_capstyle=self.estiloP,  # dash or solid : "butt" "round" "projecting"
-                     dash_joinstyle=self.estiloU,  # dash or solid : "miter" "round" "bevel"
+                     dash_joinstyle=self.estiloU,
+                     #marker_joinstyle=self.estiloU,# dash or solid : "miter" "round" "bevel"
                      marker=self.estiloM,  # o . *  x   1
                      markersize=self.tamMarc,
                      markerfacecolor=self.colorM,  # color interno del marcador
@@ -289,8 +292,12 @@ class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow):
 
         # si comienzo con xmin en n seria:
         xtick = []
-        for i in range(self.xMin, self.xMax, self.xDivisiones):
+        #for i in range(self.xMin, self.xMax, self.xDivisiones):
+        #    xtick.append(i)
+        #print(self.xMax/self.xDivisiones)
+        for i in range(self.xMin, self.xMax, int(self.xMax/self.xDivisiones)):
             xtick.append(i)
+
         #print("Ticks para X: ")
         #print(xtick)
 
@@ -299,7 +306,9 @@ class MyApp(QtWidgets.QMainWindow, interfaz.Ui_MainWindow):
         self.ax.set_xticks(xtick)
 
         ytick = []
-        for i in range(self.yMin, self.yMax, self.yDivisiones):
+        #for i in range(self.yMin, self.yMax, self.yDivisiones):
+        #    ytick.append(i)
+        for i in range(self.yMin, self.yMax, int(self.yMax/self.yDivisiones)):
             ytick.append(i)
         #print("Ticks para Y: ")
         #print(ytick)

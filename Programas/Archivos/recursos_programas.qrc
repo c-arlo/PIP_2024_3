@@ -2,6 +2,13 @@
   <qresource prefix="Logos">
     <file>mexico.png</file>
   </qresource>
+  <qresource prefix="Juego">
+    <file>centro.png</file>
+    <file>Darrow.png</file>
+    <file>Rarrow.png</file>
+    <file>Uarrow.png</file>
+    <file>Larrow.png</file>
+  </qresource>
   <qresource prefix="PPT">
     <file>default.jpg</file>
     <file>piedra.jpg</file>
