@@ -17,5 +17,5 @@ void loop() {
   analogWrite(led,brillo); //aplica al led el valor obtenido del brillo
   Serial.println(valor);
 
-  delay(100);
+  delay(1000);
 }

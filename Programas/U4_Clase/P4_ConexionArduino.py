@@ -21,12 +21,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         if texto == "CONECTAR" and self.arduino is None:
             self.arduino = serial.Serial(port=com, baudrate=9600, timeout=1)
             self.btnAccion.setText("DESCONECTAR")
+            self.txtEstado.setText("CONECTADO")
         elif texto == "DESCONECTAR" and self.arduino.isOpen():
             self.arduino.close()
             self.btnAccion.setText("RECONECTAR")
+            self.txtEstado.setText("DESCONECTADO")
         else:
             self.arduino.open()
             self.btnAccion.setText("DESCONECTAR")
+            self.txtEstado.setText("CONECTADO")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

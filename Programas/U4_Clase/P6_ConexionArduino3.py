@@ -18,7 +18,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.arduino = None
         self.segundoPlano = QtCore.QTimer()
         self.segundoPlano.timeout.connect(self.lecturaArduino)
-        self.estadoLed = 0
+        self.estadoLed = 1
 
     # Área de los Slots
     def accion(self):
