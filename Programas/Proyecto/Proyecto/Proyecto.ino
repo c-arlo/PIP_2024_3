@@ -42,7 +42,7 @@ int pvalor = -1;
 
 void loop() {
   valor = analogRead(pot);
-  valor = map(valor, 0, 1023, 0, 100);
+  valor = map(valor, 0, 1024, 0, 100);
   if (valor != pvalor) {
     Serial.println("V/"+String(valor));
     pvalor = valor;
@@ -50,7 +50,7 @@ void loop() {
 
   if (IrReceiver.decode()) {
     m = IrReceiver.decodedIRData.decodedRawData, HEX;
-    Serial.println(m);
+    //Serial.println(m);
     if (m == "3125149440") {
       Serial.println("T/STOP");
     } else if(m == "3141861120") {
