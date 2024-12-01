@@ -52,19 +52,21 @@ void loop() {
     m = IrReceiver.decodedIRData.decodedRawData, HEX;
     Serial.println(m);
     if (m == "3125149440") {
-      Serial.println("OFF");
+      Serial.println("T/STOP");
     } else if(m == "3141861120") {
-      if (pause) {
-        Serial.println("T/PLAY");
-      } else {
-        Serial.println("T/PAUSE");
-      }
+      Serial.println("T/PLAY");
     } else if(m == "3208707840") {
       Serial.println("T/PREV");
     } else if(m == "3158572800") {
       Serial.println("T/NEXT");
+    } else if(m == "3860463360") {
+      Serial.println("T/REWIND");
+    } else if(m == "3091726080") {
+      Serial.println("T/MUTE");
+    } else if(m == "4127850240") {
+      Serial.println("T/VOLDWN");
     } else if(m == "3927310080") {
-      Serial.println("VOL DOWN");
+      Serial.println("T/VOLUP");
     }
     IrReceiver.resume();
   }
@@ -76,9 +78,10 @@ void loop() {
         pause = true;
       } else if (input.substring(2) == "PLAY") {
         pause = false;
-      } else if (input.substring(2) == "RESET") {
-        sevseg.setNumber(0, 2);
-        secs = 0;
+      } else if (input.substring(2) == "REWIND") {
+        pause = true;
+        sevseg.setNumber(0);
+        secs = -1;
         mins = 0;
         timer = 0;
       } else if (input.substring(2) == "STOP") {
@@ -86,7 +89,7 @@ void loop() {
         lcd.print("Jukebox V1");
         pause = true;
         sevseg.setNumber(0, 2);
-        secs = 0;
+        secs = -1;
         mins = 0;
         timer = 0;
       }

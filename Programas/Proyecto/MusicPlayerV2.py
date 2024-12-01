@@ -1,4 +1,6 @@
 import sys
+import time
+
 import serial as ser
 from PyQt5 import uic, QtWidgets, QtCore
 # from PyQt5.QtCore import QThread, pyqtSignal
@@ -61,18 +63,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.songsDir[n] = f
             self.listSongs.addItem(str(len(self.songs)) + ".- " + n)
             if len(self.songs) != 0:
+                self.rewind()
                 self.btnPlay.setEnabled(True)
                 self.btnStop.setEnabled(True)
                 self.btnNext.setEnabled(True)
                 self.btnPrev.setEnabled(True)
                 self.btnRewind.setEnabled(True)
-            elif mixer.music.get_busy():
-                self.setSong()
+                self.sliderPlayT.setEnabled(True)
 
     def connectArduino(self):
         if self.arduino is None:
             try:
-                self.arduino = ser.Serial(port="COM6", baudrate=9600, timeout=0.1)
+                self.arduino = ser.Serial(port="COM6", baudrate=9600, timeout=0.01)
             except Exception as e:
                 m = QtWidgets.QMessageBox()
                 m.setText("⚠ ERROR: No se encuentra un dispositivo conectado")
@@ -80,7 +82,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 return
             self.btnArduino.setText("✔")
             self.txtArduino.setText("Conectado")
-            self.arduinoTimer.start(1)
+            self.arduinoTimer.start(2)
         else:
             self.arduino = None
             self.btnArduino.setText("✖")
@@ -92,12 +94,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.btnPlay.setText("►")
             self.paused = True
             self.playTimer.stop()
+            time.sleep(0.1)
             self.writeArduino("T/PAUSE")
         else:
             mixer.music.unpause()
             self.btnPlay.setText("II")
             self.paused = False
-            self.playTimer.start(1)
+            self.playTimer.start(2)
+            time.sleep(0.1)
             self.writeArduino("T/PLAY")
 
     def setSong(self):
@@ -105,8 +109,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.txtSong.setText(c)
         self.writeArduino("M/" + c)
         mixer.music.load(self.songsDir[self.songs[self.index]])
-        mixer.music.play()
-        mixer.music.pause()
         s = mixer.Sound(self.songsDir[self.songs[self.index]]).get_length()
         l = ""
         if s / 60 < 10:
@@ -121,6 +123,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.txtSongLen.setText(l)
         self.sliderPlayT.setMaximum(int(s))
         self.sliderPlayT.setValue(0)
+        mixer.music.play()
+        mixer.music.pause()
 
     def setPlayTime(self):
         self.msecs += 1
@@ -150,7 +154,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.secs = e
         mixer.music.rewind()
         mixer.music.set_pos(e)
-        self.playTimer.start(1)
+        self.playTimer.start(2)
         mixer.music.unpause()
 
     def muted(self):
@@ -196,9 +200,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.resetTimer()
         self.index = 0
         self.setSong()
-        self.paused = False
-        self.play()
+        self.paused = True
+        self.btnPlay.setText("►")
         self.writeArduino("T/STOP")
+        c = str(self.index + 1) + ".- " + self.songs[self.index]
+        time.sleep(0.1)
+        self.writeArduino("M/" + c)
 
     def resetTimer(self):
         mixer.music.stop()
@@ -206,14 +213,16 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.msecs = 0
         self.secs = 0
         self.txtSongPlayT.setText("00 : 00")
-        self.writeArduino("T/RESET")
+        self.writeArduino("T/REWIND")
+        time.sleep(0.1)
 
     def rewind(self):
         self.resetTimer()
         self.setSong()
         mixer.music.rewind()
-        self.paused = False
-        self.play()
+        self.paused = True
+        self.btnPlay.setText("►")
+        self.writeArduino("T/REWIND")
 
     def writeArduino(self, cadena):
         if self.arduino is not None and self.arduino.isOpen():
@@ -227,14 +236,22 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 if c != "":
                     if "V/" in c:
                         self.sliderVol.setValue(int(c.split("/")[1]))
+                    elif "STOP" in c:
+                        self.stop()
                     elif "PLAY" in c:
                         self.play()
-                    elif "PAUSE" in c:
-                        self.pause()
                     elif "PREV" in c:
                         self.prevSong()
                     elif "NEXT" in c:
                         self.skipSong()
+                    elif "REWIND" in c:
+                        self.rewind()
+                    elif "MUTE" in c:
+                        self.muted()
+                    elif "VOLDWN" in c:
+                        self.sliderVol.setValue(self.vol+10)
+                    elif "VOLUP" in c:
+                        self.sliderVol.setValue(self.vol-10)
             except Exception as e:
                 print(e)
 
