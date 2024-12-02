@@ -3,7 +3,6 @@ import time
 
 import serial as ser
 from PyQt5 import uic, QtWidgets, QtCore
-# from PyQt5.QtCore import QThread, pyqtSignal
 from tkinter import filedialog
 from pygame import mixer
 
@@ -85,7 +84,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.arduinoTimer.start(2)
         else:
             self.arduino = None
-            self.btnArduino.setText("✖")
+            self.btnArduino.setText("🔌")
             self.txtArduino.setText("Desconectado")
 
     def play(self):
@@ -259,4 +258,5 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = MyApp()
     window.show()
+    app.setStyle("Windows")
     sys.exit(app.exec_())
