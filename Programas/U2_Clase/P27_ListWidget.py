@@ -19,9 +19,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lista_alumnos.append(nombre_alumnos)
         self.lw_alumnos.addItem(nombre_alumnos)
         self.txt_nombre.setText("")
+        self.lw_alumnos.update()
 
     def cambia_valor(self):
         print(self.lw_alumnos.currentItem().text())
+        self.lw_alumnos.removeItemWidget(self.lw_alumnos.currentItem())
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

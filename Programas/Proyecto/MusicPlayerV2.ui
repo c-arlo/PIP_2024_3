@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>673</width>
+    <width>672</width>
     <height>618</height>
    </rect>
   </property>
@@ -430,7 +430,7 @@ background-color: rgb(255, 255, 255);</string>
      <string>↺</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnRewind_2">
+   <widget class="QPushButton" name="btnDelete">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -457,7 +457,7 @@ background-color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>673</width>
+     <width>672</width>
      <height>21</height>
     </rect>
    </property>

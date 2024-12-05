@@ -39,6 +39,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnMute.clicked.connect(self.muted)
         self.btnRewind.clicked.connect(self.rewind)
         self.btnArduino.clicked.connect(self.connectArduino)
+        self.btnDelete.clicked.connect(self.deleteSong)
 
         self.sliderVol.valueChanged.connect(self.setVolume)
         self.sliderPlayT.sliderPressed.connect(self.stopSongPos)
@@ -50,7 +51,43 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.playTimer.timeout.connect(self.setPlayTime)
         self.arduinoTimer.timeout.connect(self.readArduino)
 
+        self.listSongs.currentItemChanged.connect(self.selectSong)
+
     # Área de los Slots
+    def deleteSong(self):
+        try:
+            self.songsDir.pop(self.songs[self.index])
+            self.songs.pop(self.index)
+            self.listSongs.removeItemWidget(self.listSongs.currentItem())
+            self.listSongs.clear()
+            self.resetTimer()
+            if len(self.songs) != 0:
+                self.index = 0
+                self.setSong()
+                c = 1
+                for i in self.songs:
+                    self.listSongs.addItem(str(c) + ".- " + i)
+                    c += 1
+            else:
+                self.txtSong.setText("")
+                self.btnPlay.setEnabled(False)
+                self.btnStop.setEnabled(False)
+                self.btnNext.setEnabled(False)
+                self.btnPrev.setEnabled(False)
+                self.btnRewind.setEnabled(False)
+                self.sliderPlayT.setEnabled(False)
+                self.btnDelete.setEnabled(False)
+        except Exception as e:
+            print(e)
+
+    def selectSong(self):
+        if len(self.songs) != 0:
+            self.index = self.listSongs.currentRow()
+            self.resetTimer()
+            self.setSong()
+            self.paused = False
+            self.play()
+
     def addSong(self):
         f = filedialog.askopenfilename(initialdir='/Downloads',
                                        title='Selecciona un archivo',
@@ -69,6 +106,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.btnPrev.setEnabled(True)
                 self.btnRewind.setEnabled(True)
                 self.sliderPlayT.setEnabled(True)
+                self.btnDelete.setEnabled(True)
 
     def connectArduino(self):
         if self.arduino is None:
@@ -81,7 +119,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 return
             self.btnArduino.setText("✔")
             self.txtArduino.setText("Conectado")
-            self.arduinoTimer.start(2)
+            self.arduinoTimer.start(1)
         else:
             self.arduino = None
             self.btnArduino.setText("🔌")
@@ -99,7 +137,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             mixer.music.unpause()
             self.btnPlay.setText("II")
             self.paused = False
-            self.playTimer.start(2)
+            self.playTimer.start(1)
             time.sleep(0.1)
             self.writeArduino("T/PLAY")
 
@@ -153,7 +191,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.secs = e
         mixer.music.rewind()
         mixer.music.set_pos(e)
-        self.playTimer.start(2)
+        self.playTimer.start(1)
         mixer.music.unpause()
 
     def muted(self):
@@ -211,6 +249,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.playTimer.stop()
         self.msecs = 0
         self.secs = 0
+        self.sliderPlayT.setValue(0)
         self.txtSongPlayT.setText("00 : 00")
         self.writeArduino("T/REWIND")
         time.sleep(0.1)
@@ -247,10 +286,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                         self.rewind()
                     elif "MUTE" in c:
                         self.muted()
-                    elif "VOLDWN" in c:
-                        self.sliderVol.setValue(self.vol+10)
-                    elif "VOLUP" in c:
+                    elif "VOLDOWN" in c:
                         self.sliderVol.setValue(self.vol-10)
+                    elif "VOLUP" in c:
+                        self.sliderVol.setValue(self.vol+10)
             except Exception as e:
                 print(e)
 

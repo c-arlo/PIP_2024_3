@@ -64,9 +64,9 @@ void loop() {
     } else if(m == "3091726080") {
       Serial.println("T/MUTE");
     } else if(m == "4127850240") {
-      Serial.println("T/VOLDWN");
-    } else if(m == "3927310080") {
       Serial.println("T/VOLUP");
+    } else if(m == "3927310080") {
+      Serial.println("T/VOLDOWN");
     }
     IrReceiver.resume();
   }
